@@ -1,0 +1,1 @@
+namespace SpaceBattle.Lib.Contracts { internal class Stub {} } namespace SpaceBattle.Lib.Models { internal class Stub {} } namespace SpaceBattle.Lib.Commands { internal class Stub {} } namespace SpaceBattle.Lib.Strategies { internal class Stub {} } namespace SpaceBattle.Lib.IoC { internal class Stub {} }
