@@ -1,4 +1,4 @@
-﻿namespace SpaceBattle.Lib.Models;
+namespace SpaceBattle.Lib.Models;
 
 public class Vector(int[] coord)
 {
@@ -20,6 +20,8 @@ public class Vector(int[] coord)
         return hash.ToHashCode();
     }
 
+    public int this[int index] => coordinates[index];
+
     public static Vector operator +(Vector? vector1, Vector? vector2)
     {
         ArgumentNullException.ThrowIfNull(vector1);
@@ -28,6 +30,23 @@ public class Vector(int[] coord)
         if (vector1.Dimension != vector2.Dimension) throw new ArgumentException("Размерности векторов должны совпадать.");
 
         return new Vector([.. vector1.coordinates.Zip(vector2.coordinates, (v1, v2) => v1 + v2)]);
+    }
+
+    public static Vector operator -(Vector? vector1, Vector? vector2)
+    {
+        ArgumentNullException.ThrowIfNull(vector1);
+        ArgumentNullException.ThrowIfNull(vector2);
+
+        if (vector1.Dimension != vector2.Dimension) throw new ArgumentException("Размерности векторов должны совпадать.");
+
+        return new Vector([.. vector1.coordinates.Zip(vector2.coordinates, (v1, v2) => v1 - v2)]);
+    }
+
+    public static Vector Concat(Vector v1, Vector v2)
+    {
+        ArgumentNullException.ThrowIfNull(v1);
+        ArgumentNullException.ThrowIfNull(v2);
+        return new([.. v1.coordinates, .. v2.coordinates]);
     }
 
     public static bool operator ==(Vector? vector1, Vector? vector2)
