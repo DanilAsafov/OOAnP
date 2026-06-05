@@ -40,6 +40,15 @@ public class RegisterIoCDependencySendCommandTest : IDisposable
     }
 
     [Fact]
+    public void Execute_ValidCommandButInvalidReceiver_ThrowsArgumentException()
+    {
+        var registerCommand = new RegisterIoCDependencySendCommand();
+        registerCommand.Execute();
+
+        Assert.Throws<ArgumentException>(() => Ioc.Resolve<ICommand>("Commands.Send", Mock.Of<ICommand>(), "NotAReceiver"));
+    }
+
+    [Fact]
     public void Execute_InvalidArgumentsCount_ThrowsArgumentException()
     {
         var registerCommand = new RegisterIoCDependencySendCommand();
